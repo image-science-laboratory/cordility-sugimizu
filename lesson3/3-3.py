@@ -3,13 +3,14 @@
 
 
 def solution(A):
-    result = 999999999999999999
-    sum_whole = sum([n for n in A])
+    sum_left = A[0]
+    sum_right = sum(A) - sum_left
+    result = abs(sum_left - sum_right)
 
-    for p in range(1, len(A)):
-        sum_left = sum([A[n] for n in range(0, p)])
-        if abs(2 * sum_left - sum_whole) < result:
-            result = abs(2 * sum_left - sum_whole)
+    for i in range(1, len(A) - 1):
+        sum_left += A[i]
+        sum_right -= A[i]
+        result = min(result, abs(sum_left - sum_right))
 
     return result
 
